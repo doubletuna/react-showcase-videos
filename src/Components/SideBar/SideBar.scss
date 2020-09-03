@@ -1,0 +1,129 @@
+.sidebar-wrapper {
+  position: sticky;
+  top: 0;
+  width: 200px;
+  min-width: 200px;
+  height: 100vh;
+  background-color: #282828;
+
+  .web-menu {
+
+    .sidebar-header {
+      font-size: 20px;
+      color: #ffffff;
+      padding: 6px 20px;
+      text-transform: capitalize;
+
+      .home-link {
+        color: #ffffff;
+        text-decoration: none;
+      }
+    }
+
+    .mint-wrapper {
+      width: 100%;
+
+      .mint {
+        width: 100%;
+        display: block;
+        padding: 6px 20px;
+        font-size: 14px;
+        line-height: 22px;
+        color: #ffffff;
+        text-transform: capitalize;
+        cursor: pointer;
+        text-decoration: none;
+      }
+    }
+
+    .active,
+    .mint-wrapper:hover {
+      background-color: #09bba6;
+    }
+  }
+
+  .mobile-menu,
+  .minimized-menu {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+
+  .sidebar-wrapper {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: fit-content;
+    background-color: transparent;
+    
+    .web-menu {
+      display: none;
+    }
+    
+    .mobile-menu {
+      background-color: #282828;
+      display: block;
+
+      .sidebar-header {
+        font-size: 20px;
+        color: #ffffff;
+        padding: 6px 20px;
+        text-transform: capitalize;
+
+        .home-link {
+          color: #ffffff;
+          text-decoration: none;
+        }
+      }
+
+      .mint-wrapper {
+        width: 100%;
+
+        .mint,
+        .close-mobile-menu {
+          width: 100%;
+          display: block;
+          padding: 6px 20px;
+          font-size: 14px;
+          line-height: 22px;
+          color: #ffffff;
+          text-transform: capitalize;
+          cursor: pointer;
+          text-decoration: none;
+        }
+      }
+
+      .close-mobile-menu {
+        width: 100%;
+        display: block;
+        padding: 6px 20px;
+        font-size: 14px;
+        line-height: 22px;
+        color: #ffffff;
+        text-transform: capitalize;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      .active,
+      .mint-wrapper:hover {
+        background-color: #09bba6;
+      }
+    }
+
+    .minimized-menu {
+      display: block;
+      margin: 20px;
+      .splat {
+        width: 35px;
+        height: 5px;
+        background-color: black;
+        margin: 6px 0;
+        border-radius: 2px;
+      }
+    }
+  }
+}

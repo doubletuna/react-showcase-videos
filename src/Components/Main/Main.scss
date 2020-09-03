@@ -1,0 +1,10 @@
+.main-wrapper {
+  margin: auto;
+  display: flex;
+
+  @media (max-width: 760px) {
+    display: block;
+    position: absolute;
+    top: 0;
+  }
+}
