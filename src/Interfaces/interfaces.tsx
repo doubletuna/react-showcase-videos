@@ -14,11 +14,16 @@ export interface IMint {
 }
 
 export interface IDoc {
-  _id:  string,
+  _id: string,
   videos: IVideo[]
 }
 
 export interface IVideo {
   previewImage: string
   url: string
+}
+
+export interface IFetch {
+  campaignId: string,
+  offset: number
 }

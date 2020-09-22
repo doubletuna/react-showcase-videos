@@ -1,14 +1,17 @@
+import { IDoc } from '../Interfaces/interfaces'
 
 export interface IGlobalState {
   mints: [],
   selectedMint: string,
-  content: any
+  content: IDoc[],
+  totalDocs: number
 }
 
 export const INITIAL_GLOBAL_STATE: IGlobalState = {
   mints: [],
   selectedMint: '',
-  content: ''
+  content: [],
+  totalDocs: 0
 }
 
 export interface IAppState {

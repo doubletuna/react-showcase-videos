@@ -10,10 +10,12 @@ export const globalReducer = (lastState: IGlobalState, action: any): IGlobalStat
     case GLOBAL_ACTIONS_CONST.FETCH_MINTS:
       return { ...lastState, mints: action.payload }
     case GLOBAL_ACTIONS_CONST.FETCH_CONTENT:
-      return { ...lastState, content: action.payload }
+      return { ...lastState, content: action.payload.docs, totalDocs: action.payload.totalDocs }
     case GLOBAL_ACTIONS_CONST.SET_SELECTED_MINT:
       return { ...lastState, selectedMint: action.payload }
-
+    case GLOBAL_ACTIONS_CONST.FETCH_MORE_CONTENT:
+      const content = [...lastState.content, ...action.payload.docs]
+      return { ...lastState, content }
     default:
       return lastState;
   }

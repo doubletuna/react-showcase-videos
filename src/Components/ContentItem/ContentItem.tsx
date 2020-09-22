@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ReactPlayer from 'react-player'
 import './ContentItem.scss'
 
 interface IVideoProps {
@@ -7,24 +8,28 @@ interface IVideoProps {
 }
 
 const Video: React.FC<IVideoProps> = ({ image, video }: IVideoProps) => {
+  const [playVideo, setplayVideo] = useState<boolean>(false)
+  const [displayImage, setDisplayImage] = useState<string>(image)
 
-  const handleMouseOverVideo = (e: any) => {
-    e.target.play()
+  const handleMouseOverVideo = () => {
+    setplayVideo(true)
+    setDisplayImage('')
   }
 
-  const handleMouseOutVideo = (e: any) => {
-    e.target.pause()
+  const handleMouseOutVideo = () => {
+    setplayVideo(false)
+    setDisplayImage(image)
   }
 
   return (
     <div className="video-wrapper">
-      <video
-        poster={image}
-        onMouseOver={(e) => { handleMouseOverVideo(e) }}
-        onMouseOut={(e) => { handleMouseOutVideo(e) }}
-        src={`${video}#t=1`}
-        muted={true}>
-      </video>
+      <ReactPlayer url={video} className="react-player" width='100%'
+        height='100%'
+        light={displayImage}
+        onMouseOver={() => { handleMouseOverVideo() }}
+        onMouseOut={() => { handleMouseOutVideo() }}
+        playing={playVideo}
+      />
     </div>
   )
 }
