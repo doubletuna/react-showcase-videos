@@ -8,7 +8,7 @@ export const GLOBAL_ACTIONS_CONST = {
 }
 
 export const fetchMints = async (dispatch: any) => {
-  const response = await fetch('https://run.mocky.io/v3/ea4b8142-2e8d-4f59-9bbb-463ede2ac058')
+  const response = await fetch('https://run.mocky.io/v3/924d0291-8222-4c25-8732-9a8783e32603')
   const processed = await response.json()
   dispatch({
     type: GLOBAL_ACTIONS_CONST.FETCH_MINTS,
@@ -35,6 +35,17 @@ export const fetchContent = async (dispatch: any, payload: IFetch) => {
       payload: processed
     })
   }
+}
+
+// mock data as original production feed is not supported anymore. 
+export const fetchMockContent = async (dispatch: any, payload: IFetch) => {
+  const response = await fetch('https://run.mocky.io/v3/85d6b20f-a85c-459a-a5d2-2b93370ae26c')
+  const processed = await response.json()
+  
+  dispatch({
+    type: GLOBAL_ACTIONS_CONST.FETCH_CONTENT,
+    payload: processed[0]
+  })
 }
 
 export const setSelectedMint = async (dispatch: any, payload: string) => {

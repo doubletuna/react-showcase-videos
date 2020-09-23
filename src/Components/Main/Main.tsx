@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { IAppState } from '../../Redux/app.state'
-import { fetchMints, fetchContent, setSelectedMint } from '../../Redux/global/global.actions'
+import { fetchMints, fetchMockContent, setSelectedMint } from '../../Redux/global/global.actions'
 import { IMint, IDoc, IFetch } from '../../Interfaces/interfaces'
 import SideBar from '../SideBar/SideBar'
 import Content from '../Content/Content'
@@ -11,7 +11,7 @@ import './Main.scss'
 
 interface IMainProps {
   fetchMints: () => void
-  fetchContent: (data: IFetch) => void
+  fetchMockContent: (data: IFetch) => void
   setSelectedMint: (campaignId: string) => void
   mints: IMint[]
   docs: IDoc[]
@@ -19,34 +19,35 @@ interface IMainProps {
   totalDocs: number
 }
 
-const Main: React.FC<IMainProps> = ({ fetchMints, fetchContent, setSelectedMint, mints, docs, totalDocs }: IMainProps) => {
+const Main: React.FC<IMainProps> = ({ fetchMints, fetchMockContent, setSelectedMint, mints, docs, totalDocs }: IMainProps) => {
   const [mintName, setMintName] = useState<string>('')
   const [showMore, setShowMore] = useState<boolean>(false)
   const [offset, setOffset] = useState<boolean>(false)
-  const { campaign } = useParams()
+  const { campaign }: any = useParams()
 
   useEffect(() => {
     fetchMints()
   }, [fetchMints])
 
   useEffect(() => {
+    
     const mint = _.find(mints, { 'slug': campaign })
     if (mint) {
       if (mint?.name !== mintName) {
-        fetchContent({ campaignId: mint.campaignId, offset: 0 })
+        fetchMockContent({ campaignId: mint.campaignId, offset: 0 })
         setSelectedMint(mint._id)
         setMintName(mint.name)
         setOffset(false)
-      }
+      }      
       totalDocs > docs.length ? setShowMore(true) : setShowMore(false)
     }
-  }, [fetchMints, fetchContent, setSelectedMint, setMintName, campaign, mints, totalDocs, docs.length, mintName, offset])
+  }, [fetchMockContent, setSelectedMint, setMintName, campaign, mints, totalDocs, docs, mintName, offset])
 
   const handleShowMore = () => {
     const mint = _.find(mints, { 'slug': campaign })
     if (totalDocs > docs.length && mint) {
       setOffset(true)
-      fetchContent({ campaignId: mint.campaignId, offset: docs.length })
+      fetchMockContent({ campaignId: mint.campaignId, offset: docs.length })
     }
   }
 
@@ -69,7 +70,7 @@ const mapStateToProps = (state: IAppState) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     fetchMints: () => fetchMints(dispatch),
-    fetchContent: (data: IFetch) => fetchContent(dispatch, data),
+    fetchMockContent: (data: IFetch) => fetchMockContent(dispatch, data),
     setSelectedMint: (campaignId: string) => setSelectedMint(dispatch, campaignId)
   }
 }
